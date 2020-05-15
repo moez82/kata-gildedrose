@@ -12,6 +12,18 @@ public class ItemTestCase {
     public void test(String initialName, int initialSellin, int initialQuality,
                      String finalName, int finalSellin, int finalQuality) {
 
+        Item initialItem = ItemFactory.create(initialName, initialSellin, initialQuality);
+
+        Inn myApp = new Inn();
+        myApp.getItems().clear();
+        myApp.getItems().add(initialItem);
+        myApp.updateQuality();
+
+        Item finalItem = myApp.getItems().get(0);
+
+        Item expectedItem = ItemFactory.create(finalName, finalSellin, finalQuality);
+        assertThat(finalItem).isEqualToComparingFieldByField(expectedItem);
+
     }
 
 }
